@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
@@ -38,6 +39,15 @@ export default function TextForm(props) {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
     }
+    const countWords = (text) => {
+        const trimmedText = text.trim();
+
+        const wordsArray = trimmedText.split(/\s+/);
+
+        const filteredWords = wordsArray.filter(word => word !== '');
+
+        return filteredWords.length + 1;
+    }
 
     return (
         <>
@@ -55,8 +65,8 @@ export default function TextForm(props) {
             </div>
             <div className='container my-2'>
                 <h1>Your Text Summary</h1>
-                <p>{text.split(" ").length - 1} words and {text.length} characters</p>
-                <p>{0.008 * text.split(" ").length} minutes read</p>
+                <p>{countWords()} words and {text.length} characters</p>
+                <p>{0.008 * countWords()} minutes read</p>
                 <h2>Preview</h2>
                 <p>{text}</p>
             </div>
